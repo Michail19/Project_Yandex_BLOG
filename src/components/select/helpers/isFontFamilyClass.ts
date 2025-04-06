@@ -1,6 +1,5 @@
-import type {
-	FontFamiliesClasses} from 'src/constants/articleProps';
 import {
+	FontFamiliesClasses,
 	fontFamilyClasses,
 } from 'src/constants/articleProps';
 

@@ -1,4 +1,3 @@
-import type { RefObject} from 'react';
 import { useEffect, useRef } from 'react';
 
 type UseOutsideClickClose = {
@@ -8,25 +7,19 @@ type UseOutsideClickClose = {
 	rootRef: React.RefObject<HTMLDivElement>;
 };
 
-export const useOutsideClickClose = <T extends HTMLElement>({
+export const useOutsideClickClose = ({
 	isOpen,
 	rootRef,
 	onClose,
 	onChange,
-}: UseOutsideClickClose): RefObject<T> => {
-	const optionRef = useRef<HTMLElement>(null);
+}: UseOutsideClickClose) => {
+	const optionRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const handleClick = (event: MouseEvent) => {
 			const { target } = event;
-			if (
-				target instanceof Node &&
-				!rootRef.current?.contains(target) &&
-				!optionRef.current?.contains(target)
-			) {
-				if (isOpen) {
-					onClose?.();
-				}
+			if (target instanceof Node && !rootRef.current?.contains(target)) {
+				isOpen && onClose?.();
 				onChange?.(false);
 			}
 		};
@@ -37,6 +30,4 @@ export const useOutsideClickClose = <T extends HTMLElement>({
 			window.removeEventListener('click', handleClick);
 		};
 	}, [onClose, onChange, isOpen]);
-
-	return optionRef as RefObject<T>;
 };

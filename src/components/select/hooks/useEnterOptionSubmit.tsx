@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-
-import type { OptionType } from 'src/constants/articleProps';
+import { OptionType } from 'src/constants/articleProps';
 
 type UseEnterOptionSubmit = {
 	onClick: (value: OptionType['value']) => void;
